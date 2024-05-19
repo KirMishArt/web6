@@ -5,18 +5,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "language")
+@Table(name = "languages")
 public class Language {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "language_seq")
-    @SequenceGenerator(name = "language_seq", sequenceName = "languages_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person person;
 }

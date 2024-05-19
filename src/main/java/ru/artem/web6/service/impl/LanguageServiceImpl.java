@@ -5,9 +5,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import ru.artem.web6.model.Language;
 import ru.artem.web6.repository.LanguageRepository;
-import ru.artem.web6.repository.PersonRepository;
 import ru.artem.web6.service.LanguageService;
-import ru.artem.web6.service.PersonService;
 
 import java.util.List;
 
@@ -19,5 +17,9 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public List<Language> AllLanguages() {
         return repository.findAll();
+    }
+    @Override
+    public List<Language> getAllByNames(List<String>names){
+        return repository.findAllByNameIn(names);
     }
 }

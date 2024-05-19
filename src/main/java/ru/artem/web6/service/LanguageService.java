@@ -9,4 +9,7 @@ import java.util.List;
 @Service
 public interface LanguageService {
     List<Language> AllLanguages();
+
+
+    List<Language> getAllByNames(List<String> names);
 }

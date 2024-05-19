@@ -1,11 +1,13 @@
 package ru.artem.web6.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import ru.artem.web6.dto.PersonDTO;
+import ru.artem.web6.model.Person;
 import ru.artem.web6.repository.LanguageRepository;
 import ru.artem.web6.service.LanguageService;
 import ru.artem.web6.service.PersonService;
@@ -21,5 +23,18 @@ public class PersonController {
         model.addAttribute("people",personService.AllPersons());
         model.addAttribute("languages",languageService.AllLanguages());
         return "people";
+    }
+    @GetMapping("/new")
+    public String newPerson(@ModelAttribute("person") PersonDTO personDTO){
+        return "form";
+    }
+    @PostMapping()
+    public String save(@ModelAttribute("person") @Valid PersonDTO personDTO,
+                       BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()) {
+            return "form";
+        }
+        personService.save(personDTO);
+        return "index";
     }
 }
