@@ -21,7 +21,6 @@ public class PersonController {
     @GetMapping()
     public String index(Model model){
         model.addAttribute("people",personService.AllPersons());
-        model.addAttribute("languages",languageService.AllLanguages());
         return "people";
     }
     @GetMapping("/new")

@@ -28,7 +28,13 @@ public class PersonServiceImpl implements PersonService {
         Person person=new Person();
         person.setLanguages(languages);
         person.setName(personDTO.getName());
-        person.setSurname(person.getSurname());
+        person.setSurname(personDTO.getSurname());
+        person.setSecond_name(personDTO.getSecond_name());
+        person.setBirth(personDTO.getBirth());
+        person.setBio(personDTO.getBio());
+        person.setEmail(personDTO.getEmail());
+        person.setGender(personDTO.getGender());
+        person.setTel(personDTO.getTel());
         personRepository.save(person);
 
     }
