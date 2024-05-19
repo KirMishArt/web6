@@ -36,4 +36,6 @@ public class PersonController {
         personService.save(personDTO);
         return "index";
     }
+    @GetMapping("/authentication")
+    public String authentication(){return "authentication";}
 }
