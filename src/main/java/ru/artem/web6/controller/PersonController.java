@@ -64,6 +64,8 @@ public class PersonController {
         model.addAttribute("people", personService.AllPersons());
         return "adminPeople";
     }
+    //hello
+    //hi
     @GetMapping("/authentication")
     public String authentication(){return "authentication";}
 }
