@@ -43,13 +43,13 @@ public class WebSecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/people/new").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/edit/*", "/delete/*").hasRole("ADMIN")
+                        .requestMatchers("/people").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/people/adminPeople").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("/people/login")
                         .permitAll()
-                        .defaultSuccessUrl("/", true) // Перенаправление на корень (http://localhost:8080) после успешной авторизации
+                        .defaultSuccessUrl("/people/adminPeople", true) // Перенаправление на корень (http://localhost:8080) после успешной авторизации
                         .failureUrl("/people/403")) // Перенаправление на страницу 403 при неудачной авторизации
                 .httpBasic(Customizer.withDefaults())
                 .logout(logout -> logout

@@ -54,10 +54,10 @@ public class PersonController {
         model.addAttribute("person",person);
         return "edit";
     }
-    @PatchMapping("/{id}")
+    @PostMapping("/{id}")
     public String update(@ModelAttribute("person")Person person,@PathVariable("id") int id){
         personService.updatePerson(id,person.getName(),person.getSurname(),person.getSecond_name(),person.getEmail());
-        return "redirect:/adminPeople";
+        return "redirect:/people/adminPeople";
     }
     @GetMapping("/adminPeople")
     public String AdminPeople(Model model) {
