@@ -45,4 +45,6 @@ public class PersonController {
     public String accessDenied() {
         return "403"; // Эта страница будет отображать ошибку доступа
     }
+    @GetMapping("/authentication")
+    public String authentication(){return "authentication";}
 }
