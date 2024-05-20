@@ -10,8 +10,9 @@ import ru.artem.web6.repository.PersonRepository;
 import ru.artem.web6.service.LanguageService;
 import ru.artem.web6.service.PersonService;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 @Primary
@@ -37,5 +38,15 @@ public class PersonServiceImpl implements PersonService {
         person.setTel(personDTO.getTel());
         personRepository.save(person);
 
+    }
+
+    @Override
+    public Optional<Person> findById(Long id) {
+        return personRepository.findById(id);
+    }
+
+    @Override
+    public void updatePerson(int id, String name, String surname, String second_name, String email) {
+         personRepository.updatePerson(id,name,surname,second_name,email);
     }
 }

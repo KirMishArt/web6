@@ -12,6 +12,8 @@ import ru.artem.web6.repository.LanguageRepository;
 import ru.artem.web6.service.LanguageService;
 import ru.artem.web6.service.PersonService;
 
+import java.util.NoSuchElementException;
+
 @Controller
 @RequestMapping("/people")
 @AllArgsConstructor
@@ -44,6 +46,23 @@ public class PersonController {
     @GetMapping("/403")
     public String accessDenied() {
         return "403"; // Эта страница будет отображать ошибку доступа
+    }
+
+    @GetMapping("/{id}")
+    public String edit(@PathVariable("id")Long id,Model model){
+        Person person = personService.findById(id).orElseThrow(() -> new NoSuchElementException("Person not found with id: " + id));
+        model.addAttribute("person",person);
+        return "edit";
+    }
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("person")Person person,@PathVariable("id") int id){
+        personService.updatePerson(id,person.getName(),person.getSurname(),person.getSecond_name(),person.getEmail());
+        return "redirect:/adminPeople";
+    }
+    @GetMapping("/adminPeople")
+    public String AdminPeople(Model model) {
+        model.addAttribute("people", personService.AllPersons());
+        return "adminPeople";
     }
     @GetMapping("/authentication")
     public String authentication(){return "authentication";}
