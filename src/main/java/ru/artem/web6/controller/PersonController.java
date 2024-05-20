@@ -34,6 +34,15 @@ public class PersonController {
             return "form";
         }
         personService.save(personDTO);
-        return "index";
+        return "redirect:/people";
+    }
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Эта страница будет отображать форму входа
+    }
+
+    @GetMapping("/403")
+    public String accessDenied() {
+        return "403"; // Эта страница будет отображать ошибку доступа
     }
 }
